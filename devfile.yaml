@@ -1,6 +1,6 @@
 schemaVersion: 2.2.2
 metadata:
-  name: python-hello-world
+  name: pymongo-fastapi-crud
 components:
   - name: python
     container:
@@ -16,6 +16,30 @@ components:
   - name: venv
     volume:
       size: 1G
+
+  - name: mongodb
+    container:
+      image: docker.io/mongodb/mongodb-community-server:6.0.1-ubi8
+      # image: quay.io/eclipse/che--centos--mongodb-36-centos7:latest-ffdf2431bbc6d9a9d2a03e95bbbe8adb49ab9eac301f268a35038c84288259c1
+      memoryLimit: 300Mi
+      env:
+      - name: MONGO_INITDB_ROOT_USERNAME
+        value: root
+      - name: MONGO_INITDB_ROOT_PASSWORD
+        value: mongo123!
+      endpoints:
+        - name: mongodb
+          exposure: none
+          protocol: tcp
+          targetPort: 27017
+      volumeMounts:
+        - name: mongodbdata
+          # path: /var/lib/mongodb/data
+          path: /data/db
+  - name: mongodbdata
+    volume:
+      size: 1G
+
 commands:
   - id: run
     exec:
