@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"name": "python3-mongodb-devfile",
+			"path": "/projects/python3-mongodb-devfile"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-python.python",
+			"mongodb.mongodb-vscode",
+			"cnshenj.vscode-task-manager",
+			"redhat.fabric8-analytics"
+		]
+	},
+	"settings": {
+		"terminal.integrated.enableMultiLinePasteWarning": false,
+		"redhat.telemetry.enabled": true,
+		"vs-kubernetes": {
+			"vs-kubernetes.crd-code-completion": "disabled",
+			"vs-kubernetes.ignore-recommendations": true
+		},
+		"workbench.startupEditor": "none",
+		"editor.minimap.enabled": false,
+		"editor.wordWrap": "on",
+		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace"
+	}
+}

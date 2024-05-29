@@ -2,7 +2,7 @@ schemaVersion: 2.2.2
 metadata:
   name: pymongo-fastapi-crud
 components:
-  - name: python
+  - name: tools
     container:
       image: quay.io/redhat_na_ssa/python3-developer-image:latest
       volumeMounts:
@@ -13,6 +13,9 @@ components:
       cpuLimit: '2'
       cpuRequest: '1'
       mountSources: true
+      env:
+        - name: VSCODE_DEFAULT_WORKSPACE
+          value: "${PROJECTS_ROOT}/python3-mongodb-devfile/.code-workspace"
   - name: venv
     volume:
       size: 1G
@@ -41,11 +44,47 @@ components:
       size: 1G
 
 commands:
-  - id: run
+  - id: run-hello-world
     exec:
       label: "Run the Hello World Program"
-      component: python
-      workingDir: ${PROJECTS_ROOT}/python-hello-world
-      commandLine: python -m venv .venv && . .venv/bin/activate && python hello-world.py
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile
+      commandLine: python hello-world.py
       group:
         kind: run
+
+  - id: mongosh-cli
+    exec:
+      label: "Start mongosh-cli"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile
+      commandLine: mongosh mongodb://localhost --username root
+      group:
+        kind: run
+
+  - id: pymongo-fastapi-app
+    exec:
+      label: "Start pymongo-fastapi-crud app"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile/pymongo-fastapi-crud
+      commandLine: python -m uvicorn main:app --reload
+      group:
+        kind: run
+
+  - id: init-env
+    exec:
+      label: '99: setup environment'
+      component: "tools"
+      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile
+      commandLine: |
+        python -m venv .venv && . .venv/bin/activate
+        python -m pip install 'fastapi[all]' 'pymongo[srv]' python-dotenv
+        # setup git default config
+        git config --local credential.helper store
+        git config --local pull.rebase true
+        git config --local fetch.prune true
+        git config --local diff.colorMoved zebra
+
+events:
+  postStart:
+    - init-env # <== Start of the workspace happens after this command is completed
