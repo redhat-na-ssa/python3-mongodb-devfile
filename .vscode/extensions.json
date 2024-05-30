@@ -2,6 +2,7 @@
   "recommendations": [
     "ms-python.python",
     "mongodb.mongodb-vscode",
-    "cnshenj.vscode-task-manager"
+    "cnshenj.vscode-task-manager",
+    "redhat.fabric8-analytics"
   ]
 }

@@ -14,8 +14,12 @@ components:
       cpuRequest: '1'
       mountSources: true
       env:
-        - name: VSCODE_DEFAULT_WORKSPACE
-          value: "${PROJECTS_ROOT}/python3-mongodb-devfile/.code-workspace"
+        - name: KUBEDOCK_ENABLED # enable 'podman run'
+          value: true
+        - name: EXHORT_PYTHON_VIRTUAL_ENV # required by Dependency Analytics extension
+          value: true
+        - name: VSCODE_DEFAULT_WORKSPACE # Workspace configuration
+          value: "${PROJECT_SOURCE}/.code-workspace"
   - name: venv
     volume:
       size: 1G
@@ -48,7 +52,7 @@ commands:
     exec:
       label: "Run the Hello World Program"
       component: tools
-      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile
+      workingDir: ${PROJECT_SOURCE}
       commandLine: python hello-world.py
       group:
         kind: run
@@ -57,7 +61,7 @@ commands:
     exec:
       label: "Start mongosh-cli"
       component: tools
-      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile
+      workingDir: ${PROJECT_SOURCE}
       commandLine: mongosh mongodb://localhost --username root
       group:
         kind: run
@@ -66,7 +70,7 @@ commands:
     exec:
       label: "Start pymongo-fastapi-crud app"
       component: tools
-      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile/pymongo-fastapi-crud
+      workingDir: ${PROJECT_SOURCE}/pymongo-fastapi-crud
       commandLine: python -m uvicorn main:app --reload
       group:
         kind: run
@@ -75,10 +79,11 @@ commands:
     exec:
       label: '99: setup environment'
       component: "tools"
-      workingDir: ${PROJECTS_ROOT}/python3-mongodb-devfile
+      workingDir: ${PROJECT_SOURCE}
       commandLine: |
         python -m venv .venv && . .venv/bin/activate
-        python -m pip install 'fastapi[all]' 'pymongo[srv]' python-dotenv
+        # python -m pip install 'fastapi[all]' 'pymongo[srv]' python-dotenv
+        python -m pip install -r requirements.txt
         # setup git default config
         git config --local credential.helper store
         git config --local pull.rebase true
