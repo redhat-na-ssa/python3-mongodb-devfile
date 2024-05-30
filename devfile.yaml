@@ -12,7 +12,7 @@ components:
       memoryRequest: '1Gi'
       cpuLimit: '2'
       cpuRequest: '1'
-      mountSources: 'true'
+      mountSources: true
       env:
         - name: KUBEDOCK_ENABLED # enable 'podman run'
           value: 'true'
