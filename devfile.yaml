@@ -12,12 +12,12 @@ components:
       memoryRequest: '1Gi'
       cpuLimit: '2'
       cpuRequest: '1'
-      mountSources: true
+      mountSources: 'true'
       env:
         - name: KUBEDOCK_ENABLED # enable 'podman run'
-          value: true
+          value: 'true'
         - name: EXHORT_PYTHON_VIRTUAL_ENV # required by Dependency Analytics extension
-          value: true
+          value: 'true'
         - name: VSCODE_DEFAULT_WORKSPACE # Workspace configuration
           value: "${PROJECT_SOURCE}/.code-workspace"
   - name: venv
@@ -36,7 +36,7 @@ components:
         value: mongo123!
       endpoints:
         - name: mongodb
-          exposure: none
+          exposure: public
           protocol: tcp
           targetPort: 27017
       volumeMounts:
@@ -81,7 +81,7 @@ commands:
       component: "tools"
       workingDir: ${PROJECT_SOURCE}
       commandLine: |
-        python -m venv .venv && . .venv/bin/activate
+        python -m venv ${HOME}/.venv && . ${HOME}/.venv/bin/activate
         # python -m pip install 'fastapi[all]' 'pymongo[srv]' python-dotenv
         python -m pip install -r requirements.txt
         # setup git default config
