@@ -16,6 +16,8 @@ components:
       env:
         - name: KUBEDOCK_ENABLED # enable 'podman run'
           value: 'true'
+        - name: KUBEDOCK_TIMEOUT
+          value: '30'
         - name: EXHORT_PYTHON_VIRTUAL_ENV # required by Dependency Analytics extension
           value: 'true'
         - name: VSCODE_DEFAULT_WORKSPACE # Workspace configuration
@@ -53,7 +55,9 @@ commands:
       label: "Run the Hello World Program"
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: python hello-world.py
+      commandLine: |
+        . ${HOME}/.venv/bin/activate
+        python hello-world.py
       group:
         kind: run
 
@@ -71,7 +75,9 @@ commands:
       label: "Start pymongo-fastapi-crud app"
       component: tools
       workingDir: ${PROJECT_SOURCE}/pymongo-fastapi-crud
-      commandLine: python -m uvicorn main:app --reload
+      commandLine: | 
+        . ${HOME}/.venv/bin/activate
+        python -m uvicorn main:app --reload
       group:
         kind: run
 
@@ -81,14 +87,20 @@ commands:
       component: "tools"
       workingDir: ${PROJECT_SOURCE}
       commandLine: |
+        # init venv
         python -m venv ${HOME}/.venv && . ${HOME}/.venv/bin/activate
-        # python -m pip install 'fastapi[all]' 'pymongo[srv]' python-dotenv
         python -m pip install -r requirements.txt
         # setup git default config
         git config --local credential.helper store
         git config --local pull.rebase true
         git config --local fetch.prune true
         git config --local diff.colorMoved zebra
+        # create app env file
+        ENV_FILE=${PROJECT_SOURCE}/pymongo-fastapi-crud/.env
+        if [ ! -f $ENV_FILE ]; then
+          echo 'ATLAS_URI=mongodb://root:mongo123!@localhost:27017' > $ENV_FILE
+          echo 'DB_NAME=pymongo_tutorial' >> $ENV_FILE
+        fi
 
 events:
   postStart:
