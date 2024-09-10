@@ -1,0 +1,9 @@
+{
+		"terminal.integrated.enableMultiLinePasteWarning": "always",
+		"redhat.telemetry.enabled": true,
+		"workbench.startupEditor": "readme",
+		"editor.minimap.enabled": false,
+		"editor.wordWrap": "on",
+		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace",
+		"workbench.colorTheme": "Solarized Light"
+}
