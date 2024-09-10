@@ -14,15 +14,12 @@
 		]
 	},
 	"settings": {
-		"terminal.integrated.enableMultiLinePasteWarning": false,
+		"terminal.integrated.enableMultiLinePasteWarning": "always",
 		"redhat.telemetry.enabled": true,
-		"vs-kubernetes": {
-			"vs-kubernetes.crd-code-completion": "disabled",
-			"vs-kubernetes.ignore-recommendations": true
-		},
-		"workbench.startupEditor": "none",
+		"workbench.startupEditor": "readme",
 		"editor.minimap.enabled": false,
 		"editor.wordWrap": "on",
-		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace"
+		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace",
+		"workbench.colorTheme": "Solarized Light"
 	}
 }
