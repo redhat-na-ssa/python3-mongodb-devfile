@@ -38,7 +38,7 @@ components:
         value: mongo123!
       endpoints:
         - name: mongodb
-          exposure: public
+          exposure: internal
           protocol: tcp
           targetPort: 27017
       volumeMounts:
