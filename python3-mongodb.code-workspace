@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"name": "python3-mongodb-devfile",
-			"path": "./python3-mongodb-devfile"
+			"path": "/projects/python3-mongodb-devfile"
 		}
 	],
 	"extensions": {
