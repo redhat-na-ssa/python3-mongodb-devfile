@@ -15,7 +15,33 @@ This repo contains two pieces to show case Python coding
 
    ```shell
    show dbs
+
    use pymongo_tutorial
+   
    show tables
-   books.movies.find()
+   
+   db.books.insertMany(
+      [ 
+        {
+          _id: '001',
+          title: 'Openshift 101',
+          author: 'Red Hat',
+          synopsis: 'Learning Openshift'
+        },
+        {
+          _id: '002',
+          title: 'Python in Action',
+          author: 'Python',
+          synopsis: 'Learning python'
+        },
+        {
+          _id: '003',
+          title: 'Java in Action',
+          author: 'Sun',
+          synopsis: 'The Java programming language'
+        }
+      ]
+   )
+
+   db.books.find()
    ```
