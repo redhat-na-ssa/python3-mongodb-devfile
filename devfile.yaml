@@ -21,7 +21,7 @@ components:
         - name: EXHORT_PYTHON_VIRTUAL_ENV # required by Dependency Analytics extension
           value: 'true'
         - name: VSCODE_DEFAULT_WORKSPACE # Workspace configuration
-          value: "${PROJECT_SOURCE}/.code-workspace"
+          value: "$(PROJECT_SOURCE)/python3-mongodb.code-workspace"
   - name: venv
     volume:
       size: 1G
