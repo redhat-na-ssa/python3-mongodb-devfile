@@ -1,4 +1,4 @@
-# Openshift DevSpaces (EclipseChe project) Sample for Python + MongoDB development
+# OpenShift Dev Spaces (Eclipse Che project) Sample for Python + MongoDB development
 
 [![Contribute](https://www.eclipse.org/che/contribute.svg)](https://{openshift_dev_spaces_url}/#https://{your_git_repository_url})
 
