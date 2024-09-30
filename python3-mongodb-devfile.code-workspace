@@ -8,6 +8,7 @@
 	"extensions": {
 		"recommendations": [
 			"ms-python.python",
+			"ms-python.pylint",
 			"mongodb.mongodb-vscode",
 			"cnshenj.vscode-task-manager",
 			"redhat.fabric8-analytics"
@@ -19,6 +20,13 @@
 		"workbench.startupEditor": "readme",
 		"editor.minimap.enabled": false,
 		"editor.wordWrap": "on",
-		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace"
+		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace",
+		"python.languageServer": "Jedi",
+		"python.defaultInterpreterPath": "${HOME}/.venv/bin/python",
+		"python.autoComplete.extraPaths": [
+			"${HOME}/.venv/lib/python3.11/site-packages/"
+		],
+		"pylint.importStrategy": "fromEnvironment",
+		"pylint.args": ["--disable=C0111", "--max-line-length=120"]
 	}
 }

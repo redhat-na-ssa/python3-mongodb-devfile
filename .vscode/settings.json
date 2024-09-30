@@ -5,5 +5,12 @@
 		"editor.minimap.enabled": false,
 		"editor.wordWrap": "on",
 		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace",
-		"workbench.colorTheme": "Solarized Light"
+		"workbench.colorTheme": "Solarized Light",
+		"python.languageServer": "Jedi",
+		"python.defaultInterpreterPath": "${HOME}/.venv/bin/python",
+		"python.autoComplete.extraPaths": [
+			"${HOME}/.venv/lib/python3.11/site-packages/"
+		],
+		"pylint.importStrategy": "fromEnvironment",
+		"pylint.args": ["--disable=C0111", "--max-line-length=120"]
 }

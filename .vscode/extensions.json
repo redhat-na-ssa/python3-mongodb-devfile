@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "ms-python.python",
+    "ms-python.pylint",
     "mongodb.mongodb-vscode",
     "cnshenj.vscode-task-manager",
     "redhat.fabric8-analytics"
