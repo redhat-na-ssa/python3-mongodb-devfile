@@ -22,11 +22,11 @@ components:
           value: 'true'
         - name: VSCODE_DEFAULT_WORKSPACE # Workspace configuration
           value: "${PROJECT_SOURCE}/python3-mongodb-devfile.code-workspace"
-    endpoints:
-    - name: fastapi
-      targetPort: 8000
-      exposure: public
-      protocol: https
+      endpoints:
+      - name: fastapi
+        targetPort: 8000
+        exposure: public
+        protocol: https
   - name: venv
     volume:
       size: 1G
