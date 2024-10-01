@@ -7,9 +7,9 @@
 		"mdb.connectionSaving.defaultConnectionSavingLocation": "Workspace",
 		"workbench.colorTheme": "Default Dark+",
 		"python.languageServer": "Jedi",
-		"python.defaultInterpreterPath": "${HOME}/.venv/bin/python",
+		"python.defaultInterpreterPath": "${env:HOME}/.venv/bin/python",
 		"python.autoComplete.extraPaths": [
-			"${HOME}/.venv/lib/python3.11/site-packages/"
+			"${env:HOME}/.venv/lib/python3.11/site-packages/"
 		],
 		"pylint.importStrategy": "fromEnvironment",
 		"pylint.args": ["--disable=C0111", "--max-line-length=120"]
