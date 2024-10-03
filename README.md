@@ -45,3 +45,23 @@ This repo contains two pieces to show case Python coding
 
    db.books.find()
    ```
+
+## Port-forwarding mongodb to your local machine
+
+If you need to connect a local client tool (eg. Mongo Compass) to the mongodb instance running inside your DevWorkspace Pod on Openshift, you can do that by
+
+> Note: you need to have the Openshift CLI tool `oc` in your system path.
+get an API toke by requesting https://oauth-openshift.apps.your-cluster-domain/oauth/token/request
+
+```bash
+oc login https://api.apps.your-cluster-domain:6443 --token='YOUR TOKEN HERE'
+oc get svc
+NAME                                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                     AGE
+workspaced2ed88cfa73a4091-service   ClusterIP   172.30.233.191   <none>        3030/TCP,27017/TCP,13131/TCP,13132/TCP,13133/TCP,8000/TCP   17m
+
+oc port-forward service/workspaced2ed88cfa73a4091-service 27017:27017
+Forwarding from 127.0.0.1:27017 -> 27017
+Forwarding from [::1]:27017 -> 27017
+```
+
+Now you can connect using the URL `mongodb://localhost:27017/`
