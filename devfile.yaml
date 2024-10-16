@@ -106,6 +106,7 @@ commands:
           echo 'ATLAS_URI=mongodb://root:mongo123!@localhost:27017' > $ENV_FILE
           echo 'DB_NAME=pymongo_tutorial' >> $ENV_FILE
         fi
+        cp $ENV_FILE ${PROJECT_SOURCE}/
 
 events:
   postStart:

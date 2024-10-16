@@ -11,13 +11,17 @@ app.include_router(book_router, tags=["books"], prefix="/book")
 
 @app.on_event("startup")
 async def startup_event():
-    app.mongodb_client = MongoClient(config["ATLAS_URI"])
-    app.database = app.mongodb_client[config["DB_NAME"] + "test"]
+    global mongo_client, db
+    mongo_client = MongoClient(config["ATLAS_URI"])
+    db = mongo_client[config["DB_NAME"] + "test"]
+    app.mongodb_client = mongo_client
+    app.database = db
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    app.mongodb_client.close()
-    app.database.drop_collection("books")
+    global mongo_client, db
+    db.drop_collection("books")
+    mongo_client.close()
 
 def test_create_book():
     with TestClient(app) as client:
